@@ -88,7 +88,7 @@
               {data:'action', name:'action', orderable: false, searchable: false}
             ]
           });
-     
+     /*Add Contact button*/
       function addForm() {
         save_method = "add";
         $('input[name=_method]').val('POST');
@@ -165,8 +165,10 @@
         }  
 
         //delete ajax request are here
-      function deleteData(id){
+         function deleteData(id){
+
           var csrf_token = $('meta[name="csrf-token"]').attr('content');
+
           swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -202,7 +204,28 @@
               swal("Your imaginary file is safe!");
             }
           });
-        }  
+        } 
+
+         //show single data ajax part here
+       function showData(id) {
+          $.ajax({
+              url: "{{ url('contact') }}" + '/' + id,
+              type: "GET",
+              dataType: "JSON",
+            success: function(data) {
+              $('#single-data').modal('show');
+              $('.modal-title').text(data.name +' '+'Informations');
+              $('#contactid').text(data.id); 
+              $('#fullname').text(data.name);
+              $('#contactemail').text(data.email);
+              $('#contactnumber').text(data.phone);
+              $('#creligion').text(data.religion);
+            },
+            error : function() {
+                alert("Ghorar DIm");
+            }
+          });
+        } 
 </script>
 </body>
 </html>

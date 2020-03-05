@@ -55,7 +55,8 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        //
+        $contact = Contact::find($id);
+        return $contact;
     }
 
     /**
@@ -99,7 +100,7 @@ class ContactController extends Controller
     public function destroy($id)
     {
         $contact = Contact::destroy($id);
-        
+
     }
 
    public function allcontact()
